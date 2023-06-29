@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Loop</title>
+    <style>
+        table th, table td {padding: 5px;}
+    </style>
+</head>
+<body>
+<h1>USERS</h1>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>EMAIL</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:utext="${user.getId()}">ID</td>
+        <td th:utext="${user.getName()}">NAME</td>
+        <td th:utext="${user.getEmail()}">EMAIL</td>
+    </tr>
+</table>
+</body>
+</html>

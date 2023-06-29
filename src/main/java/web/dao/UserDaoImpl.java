@@ -23,8 +23,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public User userById(long id) {
+        return entityManager.find(User.class, id);
+    }
+
+    @Override
     public void deleteUser(long id) {
-        User user = entityManager.find(User.class, id);
+        User user = userById(id);
         if (user == null) {
             throw new NullPointerException("Пользователь с таким id не найден");
         }
@@ -32,7 +37,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void updateUser(User user) {
-        entityManager.merge(user);
+    public void updateUser(long id, User updatedUser) {
+        User user = userById(id);
+        user.setName(updatedUser.getName());
+        user.setEmail(updatedUser.getEmail());
     }
 }
