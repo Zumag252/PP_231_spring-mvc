@@ -21,6 +21,12 @@ public class UserController {
         return "listUsers";
     }
 
+    @GetMapping("/{id}")
+    public String getUserById(@PathVariable("id") long id, Model model) {
+        model.addAttribute("user", userService.userById(id));
+        return "showUser";
+    }
+
     @GetMapping("/new")
     public String newUser(@ModelAttribute("user") User user) {
         return "new";
@@ -42,6 +48,12 @@ public class UserController {
     public String updateUser(@ModelAttribute("user") User updateUser
                             , @PathVariable("id") long id) {
         userService.updateUser(id, updateUser);
+        return "redirect:/users";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteUser(@PathVariable("id") long id) {
+        userService.deleteUser(id);
         return "redirect:/users";
     }
 }
